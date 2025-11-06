@@ -103,6 +103,23 @@ conditions, I will consider adding a trophy. I am waiting for contributions.
 4. Target aggregation result.
 5. Rank progress bar.
 
+# Available Trophies
+
+The following trophy types are available and can be filtered using the `title`
+parameter:
+
+- **Stars** - Total stars on your repositories
+- **Commits** - Total commits made
+- **Followers** - Number of followers
+- **Issues** - Issues opened
+- **PullRequest** - Pull requests created
+- **Repositories** - Number of repositories
+- **Reviews** - Pull request reviews
+- **Sponsors** - Number of users/projects you are sponsoring (not your sponsors)
+- **Experience** - Years on GitHub
+- **MultiLanguage** - Number of programming languages used (Secret trophy)
+- **Organizations** - Number of organizations joined (Secret trophy)
+
 # Optional Request Parameters
 
 - [title](#filter-by-titles)
@@ -130,7 +147,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Followers
 If you want to specify multiple titles.
 
 ```
-https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Stars,Followers
+https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Stars,Followers,Sponsors
 ```
 
 <p align="center">
