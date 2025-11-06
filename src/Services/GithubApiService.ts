@@ -80,16 +80,27 @@ export class GithubApiService extends GithubRepository {
       this.requestUserSponsoring(username),
     ]);
     const [activity, issue, pullRequest, sponsoring] = await promises;
-    const status = [
-      activity.status,
-      issue.status,
-      pullRequest.status,
-      sponsoring.status,
-    ];
 
-    if (status.includes("rejected")) {
+    // Check if critical data is available
+    if (
+      activity.status === "rejected" ||
+      issue.status === "rejected" ||
+      pullRequest.status === "rejected"
+    ) {
       Logger.error(`Can not find a user with username:' ${username}'`);
       return new ServiceError("Not found", EServiceKindError.NOT_FOUND);
+    }
+
+    // Handle sponsoring data gracefully - it may be private
+    let sponsoringData: GitHubUserSponsoring;
+    if (sponsoring.status === "rejected") {
+      Logger.error(
+        `Sponsoring data unavailable for user: ${username}, defaulting to 0`,
+      );
+      sponsoringData = { sponsoring: { totalCount: 0 } };
+    } else {
+      sponsoringData =
+        (sponsoring as PromiseFulfilledResult<GitHubUserSponsoring>).value;
     }
 
     return new UserInfo(
@@ -97,7 +108,7 @@ export class GithubApiService extends GithubRepository {
       (issue as PromiseFulfilledResult<GitHubUserIssue>).value,
       (pullRequest as PromiseFulfilledResult<GitHubUserPullRequest>).value,
       repository,
-      (sponsoring as PromiseFulfilledResult<GitHubUserSponsoring>).value,
+      sponsoringData,
     );
   }
 
