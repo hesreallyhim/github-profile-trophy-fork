@@ -4,6 +4,7 @@ import {
   GitHubUserIssue,
   GitHubUserPullRequest,
   GitHubUserRepository,
+  GitHubUserSponsoring,
   UserInfo,
 } from "../user_info.ts";
 import {
@@ -11,6 +12,7 @@ import {
   queryUserIssue,
   queryUserPullRequest,
   queryUserRepository,
+  queryUserSponsoring,
 } from "../Schemas/index.ts";
 import { Retry } from "../Helpers/Retry.ts";
 import { CONSTANTS } from "../utils.ts";
@@ -54,6 +56,14 @@ export class GithubApiService extends GithubRepository {
       { username },
     );
   }
+  async requestUserSponsoring(
+    username: string,
+  ): Promise<GitHubUserSponsoring | ServiceError> {
+    return await this.executeQuery<GitHubUserSponsoring>(
+      queryUserSponsoring,
+      { username },
+    );
+  }
   async requestUserInfo(username: string): Promise<UserInfo | ServiceError> {
     // Avoid to call others if one of them is null
     const repository = await this.requestUserRepository(username);
@@ -67,12 +77,14 @@ export class GithubApiService extends GithubRepository {
       this.requestUserActivity(username),
       this.requestUserIssue(username),
       this.requestUserPullRequest(username),
+      this.requestUserSponsoring(username),
     ]);
-    const [activity, issue, pullRequest] = await promises;
+    const [activity, issue, pullRequest, sponsoring] = await promises;
     const status = [
       activity.status,
       issue.status,
       pullRequest.status,
+      sponsoring.status,
     ];
 
     if (status.includes("rejected")) {
@@ -85,6 +97,7 @@ export class GithubApiService extends GithubRepository {
       (issue as PromiseFulfilledResult<GitHubUserIssue>).value,
       (pullRequest as PromiseFulfilledResult<GitHubUserPullRequest>).value,
       repository,
+      (sponsoring as PromiseFulfilledResult<GitHubUserSponsoring>).value,
     );
   }
 

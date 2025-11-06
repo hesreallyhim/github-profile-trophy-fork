@@ -26,6 +26,12 @@ export type GitHubUserPullRequest = {
   };
 };
 
+export type GitHubUserSponsoring = {
+  sponsoring: {
+    totalCount: number;
+  };
+};
+
 export type GitHubUserActivity = {
   createdAt: string;
   contributionsCollection: {
@@ -49,6 +55,7 @@ export class UserInfo {
   public readonly totalReviews: number;
   public readonly totalStargazers: number;
   public readonly totalRepositories: number;
+  public readonly totalSponsoring: number;
   public readonly languageCount: number;
   public readonly durationYear: number;
   public readonly durationDays: number;
@@ -60,6 +67,7 @@ export class UserInfo {
     userIssue: GitHubUserIssue,
     userPullRequest: GitHubUserPullRequest,
     userRepository: GitHubUserRepository,
+    userSponsoring: GitHubUserSponsoring,
   ) {
     const totalCommits =
       userActivity.contributionsCollection.restrictedContributionsCount +
@@ -106,6 +114,7 @@ export class UserInfo {
       userActivity.contributionsCollection.totalPullRequestReviewContributions;
     this.totalStargazers = totalStargazers;
     this.totalRepositories = userRepository.repositories.totalCount;
+    this.totalSponsoring = userSponsoring.sponsoring.totalCount;
     this.languageCount = languages.size;
     this.durationYear = durationYear;
     this.durationDays = durationDays;

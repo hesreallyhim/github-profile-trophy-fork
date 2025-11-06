@@ -13,6 +13,7 @@ import {
   TotalPullRequestTrophy,
   TotalRepositoryTrophy,
   TotalReviewsTrophy,
+  TotalSponsoringTrophy,
   TotalStarTrophy,
   Trophy,
 } from "./trophy.ts";
@@ -31,6 +32,7 @@ export class TrophyList {
       new TotalPullRequestTrophy(userInfo.totalPullRequests),
       new TotalRepositoryTrophy(userInfo.totalRepositories),
       new TotalReviewsTrophy(userInfo.totalReviews),
+      new TotalSponsoringTrophy(userInfo.totalSponsoring),
     );
     // Secret trophies
     this.trophies.push(

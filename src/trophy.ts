@@ -616,3 +616,53 @@ export class TotalRepositoryTrophy extends Trophy {
     this.filterTitles = ["Repo", "Repository", "Repositories"];
   }
 }
+
+export class TotalSponsoringTrophy extends Trophy {
+  constructor(score: number) {
+    const rankConditions = [
+      new RankCondition(
+        RANK.SSS,
+        "Super Supporter",
+        50,
+      ),
+      new RankCondition(
+        RANK.SS,
+        "Ultra Supporter",
+        30,
+      ),
+      new RankCondition(
+        RANK.S,
+        "Hyper Supporter",
+        20,
+      ),
+      new RankCondition(
+        RANK.AAA,
+        "Great Supporter",
+        15,
+      ),
+      new RankCondition(
+        RANK.AA,
+        "Big Supporter",
+        10,
+      ),
+      new RankCondition(
+        RANK.A,
+        "Active Supporter",
+        7,
+      ),
+      new RankCondition(
+        RANK.B,
+        "Supporter",
+        5,
+      ),
+      new RankCondition(
+        RANK.C,
+        "First Sponsor",
+        1,
+      ),
+    ];
+    super(score, rankConditions);
+    this.title = "Sponsors";
+    this.filterTitles = ["Sponsor", "Sponsors", "Sponsoring", "Supporter"];
+  }
+}
