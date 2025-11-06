@@ -127,8 +127,8 @@ support for others:
 - **StarsGiven** - Total stars you've awarded to other repositories
 - **Following** - Number of developers you follow
 - **Forks** - Repositories you've forked (contributing to others' work)
-- **Contributions** - Commits to repositories where you don't have write access
-  (generosity metric)
+- **Contributions** - Commits to repositories you don't own (supporting others'
+  projects)
 
 ## Secret Trophies
 
