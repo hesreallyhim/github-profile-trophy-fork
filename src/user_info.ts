@@ -27,6 +27,7 @@ export type GitHubUserPullRequest = {
 };
 
 export type GitHubUserActivity = {
+  login: string;
   createdAt: string;
   contributionsCollection: {
     totalCommitContributions: number;
@@ -38,6 +39,34 @@ export type GitHubUserActivity = {
   };
   followers: {
     totalCount: number;
+  };
+};
+
+type CommitContribution = {
+  repository: {
+    isInOrganization: boolean;
+    viewerPermission: string | null;
+    owner: {
+      login: string;
+    };
+  };
+  contributions: {
+    totalCount: number;
+  };
+};
+
+export type GitHubUserContributions = {
+  starredRepositories: {
+    totalCount: number;
+  };
+  following: {
+    totalCount: number;
+  };
+  repositories: {
+    totalCount: number;
+  };
+  contributionsCollection: {
+    commitContributionsByRepository: CommitContribution[];
   };
 };
 export class UserInfo {
@@ -55,11 +84,16 @@ export class UserInfo {
   public readonly ancientAccount: number;
   public readonly joined2020: number;
   public readonly ogAccount: number;
+  public readonly totalStarsGiven: number;
+  public readonly totalFollowing: number;
+  public readonly totalForkedRepos: number;
+  public readonly totalExternalContributions: number;
   constructor(
     userActivity: GitHubUserActivity,
     userIssue: GitHubUserIssue,
     userPullRequest: GitHubUserPullRequest,
     userRepository: GitHubUserRepository,
+    userContributions?: GitHubUserContributions,
   ) {
     const totalCommits =
       userActivity.contributionsCollection.restrictedContributionsCount +
@@ -112,5 +146,35 @@ export class UserInfo {
     this.ancientAccount = ancientAccount;
     this.joined2020 = joined2020;
     this.ogAccount = ogAccount;
+
+    // Contribution-focused metrics
+    if (userContributions) {
+      this.totalStarsGiven = userContributions.starredRepositories.totalCount;
+      this.totalFollowing = userContributions.following.totalCount;
+      this.totalForkedRepos = userContributions.repositories.totalCount;
+
+      // Calculate external contributions (commits to repos where user is not owner/admin/maintainer)
+      const username = userActivity.login;
+      const externalCommits = userContributions.contributionsCollection
+        .commitContributionsByRepository
+        .filter((contrib) => {
+          const repo = contrib.repository;
+          // Consider it external if:
+          // 1. User doesn't own it (owner.login !== username)
+          // 2. User has no write permissions (viewerPermission is READ or null)
+          const isNotOwner = repo.owner.login !== username;
+          const hasNoWriteAccess = !repo.viewerPermission ||
+            repo.viewerPermission === "READ";
+          return isNotOwner && hasNoWriteAccess;
+        })
+        .reduce((total, contrib) => total + contrib.contributions.totalCount, 0);
+
+      this.totalExternalContributions = externalCommits;
+    } else {
+      this.totalStarsGiven = 0;
+      this.totalFollowing = 0;
+      this.totalForkedRepos = 0;
+      this.totalExternalContributions = 0;
+    }
   }
 }

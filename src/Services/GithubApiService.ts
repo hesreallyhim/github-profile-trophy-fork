@@ -1,6 +1,7 @@
 import { GithubRepository } from "../Repository/GithubRepository.ts";
 import {
   GitHubUserActivity,
+  GitHubUserContributions,
   GitHubUserIssue,
   GitHubUserPullRequest,
   GitHubUserRepository,
@@ -8,6 +9,7 @@ import {
 } from "../user_info.ts";
 import {
   queryUserActivity,
+  queryUserContributions,
   queryUserIssue,
   queryUserPullRequest,
   queryUserRepository,
@@ -54,6 +56,14 @@ export class GithubApiService extends GithubRepository {
       { username },
     );
   }
+  async requestUserContributions(
+    username: string,
+  ): Promise<GitHubUserContributions | ServiceError> {
+    return await this.executeQuery<GitHubUserContributions>(
+      queryUserContributions,
+      { username },
+    );
+  }
   async requestUserInfo(username: string): Promise<UserInfo | ServiceError> {
     // Avoid to call others if one of them is null
     const repository = await this.requestUserRepository(username);
@@ -67,8 +77,9 @@ export class GithubApiService extends GithubRepository {
       this.requestUserActivity(username),
       this.requestUserIssue(username),
       this.requestUserPullRequest(username),
+      this.requestUserContributions(username),
     ]);
-    const [activity, issue, pullRequest] = await promises;
+    const [activity, issue, pullRequest, contributions] = await promises;
     const status = [
       activity.status,
       issue.status,
@@ -80,11 +91,17 @@ export class GithubApiService extends GithubRepository {
       return new ServiceError("Not found", EServiceKindError.NOT_FOUND);
     }
 
+    // Contributions are optional - if they fail, pass undefined
+    const contributionsValue = contributions.status === "fulfilled"
+      ? (contributions as PromiseFulfilledResult<GitHubUserContributions>).value
+      : undefined;
+
     return new UserInfo(
       (activity as PromiseFulfilledResult<GitHubUserActivity>).value,
       (issue as PromiseFulfilledResult<GitHubUserIssue>).value,
       (pullRequest as PromiseFulfilledResult<GitHubUserPullRequest>).value,
       repository,
+      contributionsValue,
     );
   }
 

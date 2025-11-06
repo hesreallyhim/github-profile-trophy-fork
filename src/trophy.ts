@@ -616,3 +616,203 @@ export class TotalRepositoryTrophy extends Trophy {
     this.filterTitles = ["Repo", "Repository", "Repositories"];
   }
 }
+
+export class TotalStarsGivenTrophy extends Trophy {
+  constructor(score: number) {
+    const rankConditions = [
+      new RankCondition(
+        RANK.SSS,
+        "Star Philanthropist",
+        1000,
+      ),
+      new RankCondition(
+        RANK.SS,
+        "Star Benefactor",
+        500,
+      ),
+      new RankCondition(
+        RANK.S,
+        "Star Supporter",
+        250,
+      ),
+      new RankCondition(
+        RANK.AAA,
+        "Star Patron",
+        100,
+      ),
+      new RankCondition(
+        RANK.AA,
+        "Star Admirer",
+        50,
+      ),
+      new RankCondition(
+        RANK.A,
+        "Star Giver",
+        25,
+      ),
+      new RankCondition(
+        RANK.B,
+        "Star Fan",
+        10,
+      ),
+      new RankCondition(
+        RANK.C,
+        "First Star Given",
+        1,
+      ),
+    ];
+    super(score, rankConditions);
+    this.title = "StarsGiven";
+    this.filterTitles = ["StarsGiven", "Starred", "StarGiver"];
+  }
+}
+
+export class TotalFollowingTrophy extends Trophy {
+  constructor(score: number) {
+    const rankConditions = [
+      new RankCondition(
+        RANK.SSS,
+        "Network Giant",
+        500,
+      ),
+      new RankCondition(
+        RANK.SS,
+        "Super Networker",
+        250,
+      ),
+      new RankCondition(
+        RANK.S,
+        "Great Networker",
+        150,
+      ),
+      new RankCondition(
+        RANK.AAA,
+        "Active Networker",
+        75,
+      ),
+      new RankCondition(
+        RANK.AA,
+        "Good Networker",
+        40,
+      ),
+      new RankCondition(
+        RANK.A,
+        "Networker",
+        20,
+      ),
+      new RankCondition(
+        RANK.B,
+        "Connecting",
+        10,
+      ),
+      new RankCondition(
+        RANK.C,
+        "First Follow",
+        1,
+      ),
+    ];
+    super(score, rankConditions);
+    this.title = "Following";
+    this.filterTitles = ["Following", "Network"];
+  }
+}
+
+export class TotalForkedReposTrophy extends Trophy {
+  constructor(score: number) {
+    const rankConditions = [
+      new RankCondition(
+        RANK.SSS,
+        "Fork Master",
+        100,
+      ),
+      new RankCondition(
+        RANK.SS,
+        "Fork Expert",
+        60,
+      ),
+      new RankCondition(
+        RANK.S,
+        "Fork Enthusiast",
+        40,
+      ),
+      new RankCondition(
+        RANK.AAA,
+        "Active Forker",
+        25,
+      ),
+      new RankCondition(
+        RANK.AA,
+        "Frequent Forker",
+        15,
+      ),
+      new RankCondition(
+        RANK.A,
+        "Forker",
+        10,
+      ),
+      new RankCondition(
+        RANK.B,
+        "Fork Starter",
+        5,
+      ),
+      new RankCondition(
+        RANK.C,
+        "First Fork",
+        1,
+      ),
+    ];
+    super(score, rankConditions);
+    this.title = "Forks";
+    this.filterTitles = ["Fork", "Forks", "Forked"];
+  }
+}
+
+export class TotalExternalContributionsTrophy extends Trophy {
+  constructor(score: number) {
+    const rankConditions = [
+      new RankCondition(
+        RANK.SSS,
+        "Ultimate Contributor",
+        1000,
+      ),
+      new RankCondition(
+        RANK.SS,
+        "Super Contributor",
+        500,
+      ),
+      new RankCondition(
+        RANK.S,
+        "Great Contributor",
+        250,
+      ),
+      new RankCondition(
+        RANK.AAA,
+        "Active Contributor",
+        100,
+      ),
+      new RankCondition(
+        RANK.AA,
+        "Regular Contributor",
+        50,
+      ),
+      new RankCondition(
+        RANK.A,
+        "Contributor",
+        20,
+      ),
+      new RankCondition(
+        RANK.B,
+        "Helping Out",
+        10,
+      ),
+      new RankCondition(
+        RANK.C,
+        "First Contribution",
+        1,
+      ),
+    ];
+    super(score, rankConditions);
+    this.title = "Contributions";
+    this.filterTitles = ["Contribution", "Contributions", "External", "Generous"];
+  }
+}
