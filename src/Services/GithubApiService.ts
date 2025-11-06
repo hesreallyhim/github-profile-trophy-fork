@@ -79,7 +79,9 @@ export class GithubApiService extends GithubRepository {
       this.requestUserPullRequest(username),
       this.requestUserContributions(username),
     ]);
+    // Note: Order matches the promises array above
     const [activity, issue, pullRequest, contributions] = await promises;
+    // Only check core promises for success - contributions are optional
     const status = [
       activity.status,
       issue.status,

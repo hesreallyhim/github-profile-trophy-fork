@@ -159,13 +159,10 @@ export class UserInfo {
         .commitContributionsByRepository
         .filter((contrib) => {
           const repo = contrib.repository;
-          // Consider it external if:
-          // 1. User doesn't own it (owner.login !== username)
-          // 2. User has no write permissions (viewerPermission is READ or null)
+          // Consider it external if the user doesn't own the repository
+          // Ownership means the user is the owner.login, regardless of permissions
           const isNotOwner = repo.owner.login !== username;
-          const hasNoWriteAccess = !repo.viewerPermission ||
-            repo.viewerPermission === "READ";
-          return isNotOwner && hasNoWriteAccess;
+          return isNotOwner;
         })
         .reduce((total, contrib) => total + contrib.contributions.totalCount, 0);
 
