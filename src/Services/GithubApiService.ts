@@ -93,9 +93,10 @@ export class GithubApiService extends GithubRepository {
       return new ServiceError("Not found", EServiceKindError.NOT_FOUND);
     }
 
-    // Contributions are optional - if they fail, pass undefined
-    const contributionsValue = contributions.status === "fulfilled"
-      ? (contributions as PromiseFulfilledResult<GitHubUserContributions>).value
+    // Contributions are optional - if they fail or return ServiceError, pass undefined
+    const contributionsValue = contributions.status === "fulfilled" &&
+        !(contributions.value instanceof ServiceError)
+      ? contributions.value
       : undefined;
 
     return new UserInfo(
