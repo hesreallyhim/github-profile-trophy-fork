@@ -1,6 +1,7 @@
 export const queryUserActivity = `
     query userInfo($username: String!) {
       user(login: $username) {
+        login
         createdAt
         contributionsCollection {
           totalCommitContributions
@@ -55,6 +56,36 @@ export const queryUserRepository = `
             totalCount
           }
           createdAt
+        }
+      }
+    }
+  }
+`;
+
+export const queryUserContributions = `
+  query userInfo($username: String!) {
+    user(login: $username) {
+      starredRepositories(first: 1) {
+        totalCount
+      }
+      following(first: 1) {
+        totalCount
+      }
+      repositories(first: 1, isFork: true) {
+        totalCount
+      }
+      contributionsCollection {
+        commitContributionsByRepository(maxRepositories: 100) {
+          repository {
+            isInOrganization
+            viewerPermission
+            owner {
+              login
+            }
+          }
+          contributions {
+            totalCount
+          }
         }
       }
     }

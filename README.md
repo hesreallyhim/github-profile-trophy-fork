@@ -103,6 +103,43 @@ conditions, I will consider adding a trophy. I am waiting for contributions.
 4. Target aggregation result.
 5. Rank progress bar.
 
+# Available Trophies
+
+The following trophy types are available and can be filtered using the `title`
+parameter:
+
+## Individual Achievement Trophies
+
+- **Stars** - Total stars received on your repositories
+- **Commits** - Total commits made
+- **Followers** - Number of followers you have
+- **Issues** - Issues opened
+- **PullRequest** - Pull requests created
+- **Repositories** - Number of repositories you own
+- **Reviews** - Pull request reviews given
+- **Experience** - Years on GitHub
+
+## Contribution to Others Trophies
+
+These trophies focus on your contributions to the open source community and
+support for others:
+
+- **StarsGiven** - Total stars you've awarded to other repositories
+- **Following** - Number of developers you follow
+- **Forks** - Repositories you've forked (contributing to others' work)
+- **Contributions** - Commits to repositories you don't own (supporting others'
+  projects)
+
+## Secret Trophies
+
+- **MultiLanguage** - Number of programming languages used
+- **Organizations** - Number of organizations joined
+- **AncientUser** - Account created before 2010
+- **OGUser** - Account created in 2008
+- **Joined2020** - Account created in 2020
+- **LongTimeUser** - Account is 10+ years old
+- **AllSuperRank** - All other trophies are S rank
+
 # Optional Request Parameters
 
 - [title](#filter-by-titles)
@@ -141,6 +178,12 @@ You can also exclude the trophies you don't want to display.
 
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&title=-Stars,-Followers
+```
+
+To display only contribution-focused trophies:
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&title=StarsGiven,Following,Forks,Contributions
 ```
 
 ## Filter by ranks

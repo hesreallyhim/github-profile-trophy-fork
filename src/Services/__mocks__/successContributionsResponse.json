@@ -1,0 +1,57 @@
+{
+  "data": {
+    "data": {
+      "user": {
+        "starredRepositories": {
+          "totalCount": 150
+        },
+        "following": {
+          "totalCount": 45
+        },
+        "repositories": {
+          "totalCount": 12
+        },
+        "contributionsCollection": {
+          "commitContributionsByRepository": [
+            {
+              "repository": {
+                "isInOrganization": false,
+                "viewerPermission": "WRITE",
+                "owner": {
+                  "login": "test"
+                }
+              },
+              "contributions": {
+                "totalCount": 50
+              }
+            },
+            {
+              "repository": {
+                "isInOrganization": true,
+                "viewerPermission": "READ",
+                "owner": {
+                  "login": "otheruser"
+                }
+              },
+              "contributions": {
+                "totalCount": 25
+              }
+            },
+            {
+              "repository": {
+                "isInOrganization": false,
+                "viewerPermission": null,
+                "owner": {
+                  "login": "anotheruser"
+                }
+              },
+              "contributions": {
+                "totalCount": 15
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
