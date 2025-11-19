@@ -5,6 +5,7 @@ import {
   GitHubUserIssue,
   GitHubUserPullRequest,
   GitHubUserRepository,
+  GitHubUserSponsoring,
   UserInfo,
 } from "../user_info.ts";
 import {
@@ -13,6 +14,7 @@ import {
   queryUserIssue,
   queryUserPullRequest,
   queryUserRepository,
+  queryUserSponsoring,
 } from "../Schemas/index.ts";
 import { Retry } from "../Helpers/Retry.ts";
 import { CONSTANTS } from "../utils.ts";
@@ -64,6 +66,14 @@ export class GithubApiService extends GithubRepository {
       { username },
     );
   }
+  async requestUserSponsoring(
+    username: string,
+  ): Promise<GitHubUserSponsoring | ServiceError> {
+    return await this.executeQuery<GitHubUserSponsoring>(
+      queryUserSponsoring,
+      { username },
+    );
+  }
   async requestUserInfo(username: string): Promise<UserInfo | ServiceError> {
     // Avoid to call others if one of them is null
     const repository = await this.requestUserRepository(username);
@@ -77,20 +87,32 @@ export class GithubApiService extends GithubRepository {
       this.requestUserActivity(username),
       this.requestUserIssue(username),
       this.requestUserPullRequest(username),
+      this.requestUserSponsoring(username),
       this.requestUserContributions(username),
     ]);
     // Note: Order matches the promises array above
-    const [activity, issue, pullRequest, contributions] = await promises;
-    // Only check core promises for success - contributions are optional
-    const status = [
-      activity.status,
-      issue.status,
-      pullRequest.status,
-    ];
+    const [activity, issue, pullRequest, sponsoring, contributions] = await promises;
 
-    if (status.includes("rejected")) {
+    // Check if critical data is available
+    if (
+      activity.status === "rejected" ||
+      issue.status === "rejected" ||
+      pullRequest.status === "rejected"
+    ) {
       Logger.error(`Can not find a user with username:' ${username}'`);
       return new ServiceError("Not found", EServiceKindError.NOT_FOUND);
+    }
+
+    // Handle sponsoring data gracefully - it may be private
+    let sponsoringData: GitHubUserSponsoring;
+    if (sponsoring.status === "rejected") {
+      Logger.error(
+        `Sponsoring data unavailable for user: ${username}, defaulting to 0`,
+      );
+      sponsoringData = { sponsoring: { totalCount: 0 } };
+    } else {
+      sponsoringData =
+        (sponsoring as PromiseFulfilledResult<GitHubUserSponsoring>).value;
     }
 
     // Contributions are optional - if they fail or return ServiceError, pass undefined
@@ -104,6 +126,7 @@ export class GithubApiService extends GithubRepository {
       (issue as PromiseFulfilledResult<GitHubUserIssue>).value,
       (pullRequest as PromiseFulfilledResult<GitHubUserPullRequest>).value,
       repository,
+      sponsoringData,
       contributionsValue,
     );
   }

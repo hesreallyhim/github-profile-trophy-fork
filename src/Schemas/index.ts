@@ -91,3 +91,13 @@ export const queryUserContributions = `
     }
   }
 `;
+
+export const queryUserSponsoring = `
+  query userInfo($username: String!) {
+    user(login: $username) {
+      sponsoring(first: 1) {
+        totalCount
+      }
+    }
+  }
+`;

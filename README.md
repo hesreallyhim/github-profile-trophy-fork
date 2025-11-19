@@ -129,6 +129,7 @@ support for others:
 - **Forks** - Repositories you've forked (contributing to others' work)
 - **Contributions** - Commits to repositories you don't own (supporting others'
   projects)
+- **Sponsors** - Number of users/projects you are sponsoring (not your sponsors)
 
 ## Secret Trophies
 

@@ -16,6 +16,7 @@ import {
   TotalPullRequestTrophy,
   TotalRepositoryTrophy,
   TotalReviewsTrophy,
+  TotalSponsoringTrophy,
   TotalStarTrophy,
   TotalStarsGivenTrophy,
   Trophy,
@@ -42,6 +43,7 @@ export class TrophyList {
       new TotalFollowingTrophy(userInfo.totalFollowing),
       new TotalForkedReposTrophy(userInfo.totalForkedRepos),
       new TotalExternalContributionsTrophy(userInfo.totalExternalContributions),
+      new TotalSponsoringTrophy(userInfo.totalSponsoring),
     );
     // Secret trophies
     this.trophies.push(
