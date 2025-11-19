@@ -1,6 +1,7 @@
 import { GithubRepository } from "../Repository/GithubRepository.ts";
 import {
   GitHubUserActivity,
+  GitHubUserContributions,
   GitHubUserIssue,
   GitHubUserPullRequest,
   GitHubUserRepository,
@@ -9,6 +10,7 @@ import {
 } from "../user_info.ts";
 import {
   queryUserActivity,
+  queryUserContributions,
   queryUserIssue,
   queryUserPullRequest,
   queryUserRepository,
@@ -56,6 +58,14 @@ export class GithubApiService extends GithubRepository {
       { username },
     );
   }
+  async requestUserContributions(
+    username: string,
+  ): Promise<GitHubUserContributions | ServiceError> {
+    return await this.executeQuery<GitHubUserContributions>(
+      queryUserContributions,
+      { username },
+    );
+  }
   async requestUserSponsoring(
     username: string,
   ): Promise<GitHubUserSponsoring | ServiceError> {
@@ -78,8 +88,10 @@ export class GithubApiService extends GithubRepository {
       this.requestUserIssue(username),
       this.requestUserPullRequest(username),
       this.requestUserSponsoring(username),
+      this.requestUserContributions(username),
     ]);
-    const [activity, issue, pullRequest, sponsoring] = await promises;
+    // Note: Order matches the promises array above
+    const [activity, issue, pullRequest, sponsoring, contributions] = await promises;
 
     // Check if critical data is available
     if (
@@ -103,12 +115,19 @@ export class GithubApiService extends GithubRepository {
         (sponsoring as PromiseFulfilledResult<GitHubUserSponsoring>).value;
     }
 
+    // Contributions are optional - if they fail or return ServiceError, pass undefined
+    const contributionsValue = contributions.status === "fulfilled" &&
+        !(contributions.value instanceof ServiceError)
+      ? contributions.value
+      : undefined;
+
     return new UserInfo(
       (activity as PromiseFulfilledResult<GitHubUserActivity>).value,
       (issue as PromiseFulfilledResult<GitHubUserIssue>).value,
       (pullRequest as PromiseFulfilledResult<GitHubUserPullRequest>).value,
       repository,
       sponsoringData,
+      contributionsValue,
     );
   }
 
