@@ -131,7 +131,7 @@ export class AllSuperRankIndividualTrophy extends Trophy {
     ];
     super(score, rankConditions);
     this.title = "AllSuperRankIndividual";
-    this.filterTitles = ["AllSuperRankIndividual"];
+    this.filterTitles = ["AllSuperRankIndividual", "AllSuperRank"];
     this.bottomMessage = "All S Rank";
     this.hidden = true;
   }

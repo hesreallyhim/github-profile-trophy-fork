@@ -40,6 +40,7 @@ export class TrophyList {
       new TotalPullRequestTrophy(userInfo.totalPullRequests),
       new TotalRepositoryTrophy(userInfo.totalRepositories),
       new TotalReviewsTrophy(userInfo.totalReviews),
+      new AccountDurationTrophy(userInfo.durationDays),
     );
     // Contribution-focused trophies (Community Trophies)
     this.communityTrophies.push(
@@ -64,7 +65,6 @@ export class TrophyList {
       new OGAccountTrophy(userInfo.ogAccount),
       new Joined2020Trophy(userInfo.joined2020),
       new MultipleOrganizationsTrophy(userInfo.totalOrganizations),
-      new AccountDurationTrophy(userInfo.durationDays),
     );
   }
   get length() {
