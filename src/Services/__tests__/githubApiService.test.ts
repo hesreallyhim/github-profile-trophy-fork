@@ -16,11 +16,6 @@ const notFoundGithubResponseMock = await import(
   { with: { type: "json" } }
 );
 
-const successSponsoringResponseMock = await import(
-  "../__mocks__/successSponsoringResponse.json",
-  { with: { type: "json" } }
-);
-
 import { ServiceError } from "../../Types/index.ts";
 
 // Unfortunatelly, The spy is a global instance
@@ -40,11 +35,17 @@ stub(
     new Promise((resolve) => {
       resolve(successGithubResponseMock.default);
     }),
-    // Should throw NOT FOUND - repository request
+    // Should throw NOT FOUND
+    new Promise((resolve) => {
+      resolve(notFoundGithubResponseMock.default);
+    }),
     new Promise((resolve) => {
       resolve(notFoundGithubResponseMock.default);
     }),
     // Should throw NOT FOUND even if request the user only
+    new Promise((resolve) => {
+      resolve(notFoundGithubResponseMock.default);
+    }),
     new Promise((resolve) => {
       resolve(notFoundGithubResponseMock.default);
     }),

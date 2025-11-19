@@ -8,13 +8,17 @@ import {
   MultipleOrganizationsTrophy,
   OGAccountTrophy,
   TotalCommitTrophy,
+  TotalExternalContributionsTrophy,
   TotalFollowerTrophy,
+  TotalFollowingTrophy,
+  TotalForkedReposTrophy,
   TotalIssueTrophy,
   TotalPullRequestTrophy,
   TotalRepositoryTrophy,
   TotalReviewsTrophy,
   TotalSponsoringTrophy,
   TotalStarTrophy,
+  TotalStarsGivenTrophy,
   Trophy,
 } from "./trophy.ts";
 import { UserInfo } from "./user_info.ts";
@@ -32,6 +36,13 @@ export class TrophyList {
       new TotalPullRequestTrophy(userInfo.totalPullRequests),
       new TotalRepositoryTrophy(userInfo.totalRepositories),
       new TotalReviewsTrophy(userInfo.totalReviews),
+    );
+    // Contribution-focused trophies
+    this.trophies.push(
+      new TotalStarsGivenTrophy(userInfo.totalStarsGiven),
+      new TotalFollowingTrophy(userInfo.totalFollowing),
+      new TotalForkedReposTrophy(userInfo.totalForkedRepos),
+      new TotalExternalContributionsTrophy(userInfo.totalExternalContributions),
       new TotalSponsoringTrophy(userInfo.totalSponsoring),
     );
     // Secret trophies

@@ -37,7 +37,7 @@
 >
 > 1. Financial support: [GitHub Sponsors](https://github.com/sponsors/ryo-ma)
 > 2. Reducing server load through self-hosting (by forking on GitHub and
->    deploying to Vercel)
+> deploying to Vercel)
 
 # Quick Start
 
@@ -108,17 +108,38 @@ conditions, I will consider adding a trophy. I am waiting for contributions.
 The following trophy types are available and can be filtered using the `title`
 parameter:
 
-- **Stars** - Total stars on your repositories
+## Individual Achievement Trophies
+
+- **Stars** - Total stars received on your repositories
 - **Commits** - Total commits made
-- **Followers** - Number of followers
+- **Followers** - Number of followers you have
 - **Issues** - Issues opened
 - **PullRequest** - Pull requests created
-- **Repositories** - Number of repositories
-- **Reviews** - Pull request reviews
-- **Sponsors** - Number of users/projects you are sponsoring (not your sponsors)
+- **Repositories** - Number of repositories you own
+- **Reviews** - Pull request reviews given
 - **Experience** - Years on GitHub
-- **MultiLanguage** - Number of programming languages used (Secret trophy)
-- **Organizations** - Number of organizations joined (Secret trophy)
+
+## Contribution to Others Trophies
+
+These trophies focus on your contributions to the open source community and
+support for others:
+
+- **StarsGiven** - Total stars you've awarded to other repositories
+- **Following** - Number of developers you follow
+- **Forks** - Repositories you've forked (contributing to others' work)
+- **Contributions** - Commits to repositories you don't own (supporting others'
+  projects)
+- **Sponsors** - Number of users/projects you are sponsoring (not your sponsors)
+
+## Secret Trophies
+
+- **MultiLanguage** - Number of programming languages used
+- **Organizations** - Number of organizations joined
+- **AncientUser** - Account created before 2010
+- **OGUser** - Account created in 2008
+- **Joined2020** - Account created in 2020
+- **LongTimeUser** - Account is 10+ years old
+- **AllSuperRank** - All other trophies are S rank
 
 # Optional Request Parameters
 
@@ -147,7 +168,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Followers
 If you want to specify multiple titles.
 
 ```
-https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Stars,Followers,Sponsors
+https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Stars,Followers
 ```
 
 <p align="center">
@@ -158,6 +179,12 @@ You can also exclude the trophies you don't want to display.
 
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&title=-Stars,-Followers
+```
+
+To display only contribution-focused trophies:
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&title=StarsGiven,Following,Forks,Contributions
 ```
 
 ## Filter by ranks
@@ -579,37 +606,34 @@ This product is licensed under the
 
 # 🙏 Sponsors
 
-Thank you so much to all the amazing sponsors who support this project! Your
-contributions help keep development going and make this work possible.
+Thank you so much to all the amazing sponsors who support this project!
+Your contributions help keep development going and make this work possible.
 
 ## 💖 Monthly Sponsors
 
-- [@pmsosa](https://github.com/pmsosa) — $10 / month
-- [@chenfeng-huang](https://github.com/chenfeng-huang) — $10 / month
-- [@holly-hacker](https://github.com/holly-hacker) — $2 / month
-- [@skillerious](https://github.com/skillerious) — $2 / month (since Aug
-  17, 2024)
-- [@LudovicGardy](https://github.com/LudovicGardy) — $10 / month (since Aug
-  15, 2024)
-- [@alexcastrodev](https://github.com/alexcastrodev) — $10 / month (since Oct
-  13, 2023, previously $50 / month)
-- [@great-work-told-is](https://github.com/great-work-told-is) — $10 / month
-  (since Apr 12, 2023)
-- [@Ilithy](https://github.com/Ilithy) — $5 / month (since Jul 21, 2022)
-- [@weakish](https://github.com/weakish) — $2 / month (since Jan 22, 2022)
-- [@Kazuhito00](https://github.com/Kazuhito00) — $2 / month (since Jan 19, 2022)
-- [@KATO-Hiro](https://github.com/KATO-Hiro) — $2 / month (since Jan 5, 2022)
-- [@batazor](https://github.com/batazor) — $2 / month (since Oct 28, 2021)
-- [@port19x](https://github.com/port19x) — $2 / month (since Jan 27, 2022)
+* [@pmsosa](https://github.com/pmsosa) — $10 / month
+* [@chenfeng-huang](https://github.com/chenfeng-huang) — $10 / month
+* [@holly-hacker](https://github.com/holly-hacker) — $2 / month
+* [@skillerious](https://github.com/skillerious) — $2 / month (since Aug 17, 2024)
+* [@LudovicGardy](https://github.com/LudovicGardy) — $10 / month (since Aug 15, 2024)
+* [@alexcastrodev](https://github.com/alexcastrodev) — $10 / month (since Oct 13, 2023, previously $50 / month)
+* [@great-work-told-is](https://github.com/great-work-told-is) — $10 / month (since Apr 12, 2023)
+* [@Ilithy](https://github.com/Ilithy) — $5 / month (since Jul 21, 2022)
+* [@weakish](https://github.com/weakish) — $2 / month (since Jan 22, 2022)
+* [@Kazuhito00](https://github.com/Kazuhito00) — $2 / month (since Jan 19, 2022)
+* [@KATO-Hiro](https://github.com/KATO-Hiro) — $2 / month (since Jan 5, 2022)
+* [@batazor](https://github.com/batazor) — $2 / month (since Oct 28, 2021)
+* [@port19x](https://github.com/port19x) — $2 / month (since Jan 27, 2022)
 
 ## 🎁 One-Time Sponsors
 
-- [@WilliamCorotan](https://github.com/WilliamCorotan) — $5 (November 5, 2025)
-- [@arnabnandy7](https://github.com/arnabnandy7) — $10 (Oct 3, 2025)
-- [@JoqarSabon](https://github.com/JoqarSabon) — $5 (May 24, 2024)
-- [@syaghoubi00](https://github.com/syaghoubi00) — $5 (Jan 28, 2024)
-- [@pylapp](https://github.com/pylapp) — $20 (Jan 15, 2024)
-- [@Dobefu](https://github.com/Dobefu) — $10 (Dec 22, 2024)
-- [@michele-lorenzoni](https://github.com/michele-lorenzoni) — $10 (Nov
-  26, 2024)
-- [@skillerious](https://github.com/skillerious) — $10 (Aug 17, 2024)
+* [@WilliamCorotan](https://github.com/WilliamCorotan) — $5 (November 5, 2025)
+* [@arnabnandy7](https://github.com/arnabnandy7) — $10 (Oct 3, 2025)
+* [@JoqarSabon](https://github.com/JoqarSabon) — $5 (May 24, 2024)
+* [@syaghoubi00](https://github.com/syaghoubi00) — $5 (Jan 28, 2024)
+* [@pylapp](https://github.com/pylapp) — $20 (Jan 15, 2024)
+* [@Dobefu](https://github.com/Dobefu) — $10 (Dec 22, 2024)
+* [@michele-lorenzoni](https://github.com/michele-lorenzoni) — $10 (Nov 26, 2024)
+* [@skillerious](https://github.com/skillerious) — $10 (Aug 17, 2024)
+
+
