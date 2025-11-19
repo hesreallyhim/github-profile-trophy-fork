@@ -139,7 +139,9 @@ support for others:
 - **OGUser** - Account created in 2008
 - **Joined2020** - Account created in 2020
 - **LongTimeUser** - Account is 10+ years old
-- **AllSuperRank** - All other trophies are S rank
+- **AllSuperRankIndividual** - All individual achievement trophies are S rank
+- **AllSuperRankCommunity** - All community trophies are S rank
+- **MegaSuperRank** - Both individual and community trophies are all S rank
 
 # Optional Request Parameters
 
