@@ -120,19 +120,53 @@ export class MultipleLangTrophy extends Trophy {
   }
 }
 
-export class AllSuperRankTrophy extends Trophy {
+export class AllSuperRankIndividualTrophy extends Trophy {
   constructor(score: number) {
     const rankConditions = [
       new RankCondition(
         RANK.SECRET,
-        "S Rank Hacker",
+        "S Rank Individual",
         1,
       ),
     ];
     super(score, rankConditions);
-    this.title = "AllSuperRank";
-    this.filterTitles = ["AllSuperRank"];
+    this.title = "AllSuperRankIndividual";
+    this.filterTitles = ["AllSuperRankIndividual", "AllSuperRank"];
     this.bottomMessage = "All S Rank";
+    this.hidden = true;
+  }
+}
+
+export class AllSuperRankCommunityTrophy extends Trophy {
+  constructor(score: number) {
+    const rankConditions = [
+      new RankCondition(
+        RANK.SECRET,
+        "S Rank Community",
+        1,
+      ),
+    ];
+    super(score, rankConditions);
+    this.title = "AllSuperRankCommunity";
+    this.filterTitles = ["AllSuperRankCommunity"];
+    this.bottomMessage = "All S Rank";
+    this.hidden = true;
+  }
+}
+
+export class MegaSuperRankTrophy extends Trophy {
+  constructor(score: number) {
+    const rankConditions = [
+      new RankCondition(
+        RANK.SECRET,
+        "Mega S Rank Hacker",
+        1,
+      ),
+    ];
+    super(score, rankConditions);
+    this.title = "MegaSuperRank";
+    this.filterTitles = ["MegaSuperRank"];
+    this.bottomMessage = "Ultimate S Rank";
     this.hidden = true;
   }
 }
