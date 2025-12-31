@@ -12,6 +12,12 @@ import { cacheProvider } from "../src/config/cache.ts";
 
 const serviceProvider = new GithubApiService();
 const client = new GithubRepositoryService(serviceProvider).repository;
+const usernameWhitelist = new Set(
+  (Deno.env.get("USERNAME_WHITELIST") ?? "")
+    .split(",")
+    .map((value) => value.trim().toLowerCase())
+    .filter(Boolean),
+);
 
 // Build cache control header with optimized caching strategy
 const cacheControlHeader = [
@@ -92,6 +98,21 @@ async function app(req: Request): Promise<Response> {
       error.render(),
       {
         status: error.status,
+        headers: new Headers({
+          "Content-Type": "text",
+          "Cache-Control": cacheControlHeader,
+        }),
+      },
+    );
+  }
+  if (
+    usernameWhitelist.size > 0 &&
+    !usernameWhitelist.has(username.toLowerCase())
+  ) {
+    return new Response(
+      "Forbidden",
+      {
+        status: 403,
         headers: new Headers({
           "Content-Type": "text",
           "Cache-Control": cacheControlHeader,
