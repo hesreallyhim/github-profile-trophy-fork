@@ -65,7 +65,7 @@ async function app(req: Request): Promise<Response> {
       <div>
         <h2>You can use this form: </h2>
         <p>Enter your username and click get trophies</p>
-        <form action="https://github-profile-trophy.vercel.app/" method="get">
+        <form action="https://github-profile-trophy-fork-two.vercel.app/" method="get">
           <label for="username">GitHub Username</label>
           <input type="text" name="username" id="username" placeholder="Ex. gabriel-logan" required>
           <label for="theme">Theme (Optional)</label>
@@ -79,7 +79,7 @@ async function app(req: Request): Promise<Response> {
         </form>
       </div>
       <script>
-        const base = "https://github-profile-trophy.vercel.app/";
+        const base = "https://github-profile-trophy-fork-two.vercel.app/";
         const button = document.querySelector("button");
         const input = document.querySelector("input");
         const temporarySpan = document.querySelector("#temporary-span");
